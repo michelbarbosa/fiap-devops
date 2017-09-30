@@ -1,0 +1,61 @@
+version: '2'
+services:
+  mysql-cadastro:
+    container_name: mysql-cadastro
+    image: mysql-serazo
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql.conf:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: fiap
+      MYSQL_DATABASE: serazo-cadastro
+    logging:
+      options:
+        max-size: 5k
+        max-file: "1"
+
+  mysql-score:
+    container_name: mysql-score
+    image: mysql-serazo
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql.conf:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: fiap
+      MYSQL_DATABASE: serazo-score
+    logging:
+      options:
+        max-size: 5k
+        max-file: "1"
+
+  serazo-cadastro:
+    container_name: serazo-cadastro
+    image: oracle/openjdk
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./serazo-cadastro-api/target/cadastro-0.0.1-SNAPSHOT.jar:/opt/cadastro-0.0.1-SNAPSHOT.jar
+    depends_on:
+      - mysql-cadastro
+    logging:
+      options:
+        max-size: 5k
+        max-file: "1"
+    command: java -Duser.timezone=America/Sao_Paulo -Dfile.encoding=UTF-8 -jar /opt/cadastro-0.0.1-SNAPSHOT.jar
+
+  serazo-score:
+    container_name: serazo-score
+    image: oracle/openjdk
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./serazo-score-api/target/score-0.0.1-SNAPSHOT.jar:/opt/score-0.0.1-SNAPSHOT.jar
+    depends_on:
+      - mysql-score
+    logging:
+      options:
+        max-size: 5k
+        max-file: "1"
+    command: java -Duser.timezone=America/Sao_Paulo -Dfile.encoding=UTF-8 -jar /opt/score-0.0.1-SNAPSHOT.jar
