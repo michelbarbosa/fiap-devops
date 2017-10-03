@@ -42,12 +42,11 @@ DROP TABLE IF EXISTS `historico`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `historico` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_empresa` int(11) NOT NULL,
+  `login_empresa` varchar(100) NOT NULL,
   `cpf` varchar(11) NOT NULL,
-  `data` TIMESTAMP NULL,
+  `data` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `historico_empresas_fk` (`id_empresa`),
-  CONSTRAINT `historico_empresas_fk` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  INDEX ix_historico_login_empresa (login_empresa)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
