@@ -34,9 +34,9 @@ services:
     container_name: serazo-cadastro
     image: oracle/openjdk
     ports:
-      - "8080:8080"
+      - "8081:5001"
     volumes:
-      - ./serazo-cadastro-api/target/cadastro-0.0.1-SNAPSHOT.jar:/opt/cadastro-0.0.1-SNAPSHOT.jar
+      - ./serazo-cadastro-api/target:/opt
     depends_on:
       - mysql-cadastro
     logging:
@@ -49,9 +49,9 @@ services:
     container_name: serazo-score
     image: oracle/openjdk
     ports:
-      - "8081:8080"
+      - "8082:5002"
     volumes:
-      - ./serazo-score-api/target/score-0.0.1-SNAPSHOT.jar:/opt/score-0.0.1-SNAPSHOT.jar
+      - ./serazo-score-api/target:/opt
     depends_on:
       - mysql-score
     logging:
