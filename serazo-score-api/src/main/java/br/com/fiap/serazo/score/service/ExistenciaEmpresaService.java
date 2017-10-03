@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 public class ExistenciaEmpresaService {
 	
 	public boolean existe(String login) throws IOException, URISyntaxException {
-		String url = String.format("http://localhost:5001/empresas?login=%s", login);
+		String url = String.format("http://serazo-cadastro:8081/empresas?login=%s", login);
 		return new RestTemplate().getRequestFactory()
 				.createRequest(new URI(url), HttpMethod.GET)
 				.execute()
