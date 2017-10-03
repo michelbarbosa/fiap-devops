@@ -37,7 +37,7 @@ public class PersistenceJPAConfig{
    public DataSource dataSource(){
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
       dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-      dataSource.setUrl("jdbc:mysql://172.18.0.3:5010/serazo-score");
+      dataSource.setUrl("jdbc:mysql://172.18.0.3:3306/serazo-score");
       
       dataSource.setUsername( "root" );
       dataSource.setPassword( "fiap" );
