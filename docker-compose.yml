@@ -19,7 +19,7 @@ services:
     container_name: mysql-score
     image: mysql-serazo
     ports:
-      - "3307:3306"
+      - "5010:3306"
     volumes:
       - ./mysql.conf:/etc/mysql/conf.d
     environment:
